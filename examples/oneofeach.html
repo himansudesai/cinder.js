@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>jQuery UI thru Ember</title>
+    <title>Cinder</title>
     <script type="text/javascript" src="../lib/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="../lib/jquery-ui-1.8.18.custom.min.js"></script>
     <script type="text/javascript" src="../lib/ember.js"></script>
     <script type="text/javascript" src="../lib/cinder.js"></script>
     <LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
-    <LINK REL=StyleSheet HREF="../css/todos.css" TYPE="text/css" MEDIA=screen>
+    <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
   </head>
     <body>
       <button id="hello">Hello</button>
@@ -111,12 +111,10 @@
         {{view Cinder.AccordionView valueObjectBinding="App.myAccordion" header="h2" class="myaccordion" collapsible=true autoHeight=true animated="bounceslide"}}
         <br/>
         {{view App.sliderView valueObjectBinding="App.slider" class="slider"}}
-        <br/>
         {{view Cinder.SliderView valueObjectBinding="App.slider" id="vertical-slider" orientation="vertical"}}
-        <div id="center-slider-text">
+        <div id="slider-text-value">
           {{App.slider.value}}
         </div>
-        <br/>
         {{view App.sliderView valueObjectBinding="App.slider" class="slider"}}
         <br/>
         {{view Cinder.TabsView contentBinding="App.myTabs" curTabBinding="App.myCurTab" id="my-tabs"}}

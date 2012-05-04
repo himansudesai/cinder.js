@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cinder - Sliders</title>
+  <script type="text/javascript" src="../lib/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery-ui-1.8.18.custom.min.js"></script>
+  <script type="text/javascript" src="../lib/ember.js"></script>
+  <script type="text/javascript" src="../lib/cinder.js"></script>
+  <LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
+  <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
+</head>
+<body>
+  <div id="about">
+    Ember wrapper around jquery-ui Date Picker with bidirectional data binding
+  </div>
+  <script language="javascript">
+    var App = Ember.Application.create();
+    App.date = Em.Object.create({
+      'value' : '04/01/2012',
+      'reset': function() {
+        this.set('value', '04/01/2012');
+    });
+
+    // Note: App specific extension only required if reacting to events
+    // Superclass provides two-way binding with Ember objects
+    App.datePickerView = Cinder.DatePickerView.extend({
+      onClose: function(dateText, inst) {
+        console.log('Date = ' + dateText + ' this = ' + this);
+      },
+      changeYear: true,
+      changeMonth: true,
+      onChangeMonthYear: function(year, month, inst) {
+        console.log('CHANGED ' + year + ' ' + month);
+      }
+    });
+  </script>
+
+  <script type="text/x-handlebars">
+    {{view Cinder.SliderView valueObjectBinding="App.slider" class="slider"}}
+    {{view Cinder.SliderView valueObjectBinding="App.slider" id="vertical-slider" orientation="vertical"}}
+    <div id="slider-text-value">
+      {{App.slider.value}}
+    </div>
+    {{view Cinder.SliderView valueObjectBinding="App.slider" class="slider"}}
+    {{#view Em.Button id="reset-button" target="App.slider" action="reset"}}
+      Reset
+    {{/view}}
+  </script>
+  
+</body>
+</html>

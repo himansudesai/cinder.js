@@ -1,3 +1,13 @@
+#about {
+  color: DarkGrey;
+  margin: 30px;
+  margin-left: 10px;
+}
+#reset-button {
+  margin: 10px;
+  margin-left: 130px;
+}
+
 .todos-progress-bar {
   width: 400px;
 }
@@ -30,17 +40,17 @@
   width: 300px;
 }
 
+#vertical-slider, #slider-text-value {
+  margin: 10px;
+  margin-left: 145px;
+}
+
 #vertical-slider {
-  margin-left: 150px;
   height: 150px;
 }
 
 #spacer {
   display: inline;
-}
-
-#center-slider-text {
-  margin-left: 150px;
 }
 
 #myaccordion .ui-accordion h2 {
