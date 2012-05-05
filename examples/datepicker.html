@@ -10,19 +10,11 @@
   <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
 </head>
 <body>
-  <div id="about">
-    Ember wrapper around jquery-ui Date Picker with bidirectional data binding
-  </div>
   <script language="javascript">
     var App = Ember.Application.create();
-    App.date = Em.Object.create({
-      'value' : '04/01/2012',
-      'reset': function() {
-        this.set('value', '04/01/2012');
-    });
 
-    // Note: App specific extension only required if reacting to events
-    // Superclass provides two-way binding with Ember objects
+    // App specific subclass - for non-default options
+    // and reacting directly to events
     App.datePickerView = Cinder.DatePickerView.extend({
       onClose: function(dateText, inst) {
         console.log('Date = ' + dateText + ' this = ' + this);
@@ -33,19 +25,22 @@
         console.log('CHANGED ' + year + ' ' + month);
       }
     });
+
+    App.someDate = Em.Object.create({
+      'value': '01/01/2012',
+      'reset': function() {
+        this.set('value', '01/01/2012')
+      }
+    });
   </script>
 
   <script type="text/x-handlebars">
-    {{view Cinder.SliderView valueObjectBinding="App.slider" class="slider"}}
-    {{view Cinder.SliderView valueObjectBinding="App.slider" id="vertical-slider" orientation="vertical"}}
-    <div id="slider-text-value">
-      {{App.slider.value}}
-    </div>
-    {{view Cinder.SliderView valueObjectBinding="App.slider" class="slider"}}
-    {{#view Em.Button id="reset-button" target="App.slider" action="reset"}}
-      Reset
-    {{/view}}
+    {{view Cinder.AboutHdr}}
+    {{view Cinder.DatePickerView valueObjectBinding="App.someDate" class="date-field"}}
+    {{view Cinder.DatePickerView valueObjectBinding="App.someDate" class="date-field"}}
+    {{#view Em.Button target="App.someDate" action="reset"}}Reset{{/view}}
+    {{view Cinder.AboutFtr}}
   </script>
-  
+
 </body>
 </html>

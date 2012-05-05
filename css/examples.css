@@ -1,7 +1,11 @@
-#about {
-  color: DarkGrey;
-  margin: 30px;
-  margin-left: 10px;
+#about-hdr, #about-ftr p {
+  width: 400px;
+  color: DimGrey;
+  text-align: justify;
+  font-size: 1em;
+  line-height: 1.25em;
+  margin: 1.25em 0;
+  text-align: justify;
 }
 #reset-button {
   margin: 10px;

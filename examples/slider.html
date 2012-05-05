@@ -10,28 +10,27 @@
   <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
 </head>
 <body>
-  <div id="about">
-    Ember wrapper around jquery-ui Slider with bidirectional data binding
-  </div>
   <script language="javascript">
     var App = Ember.Application.create();
+
+    // App specific subclass - for non-default options
+    // and reacting directly to events
+    App.sliderView = Cinder.SliderView.extend({
+      stop: function(event, slider) {
+        console.log('Slider changed to ' + slider.value);
+      }
+    });
+
     App.slider = Em.Object.create({
       'value': 50,
       'reset': function() {
         this.set('value', 50);
       }
     });
-
-    // Note: App specific extension only required if reacting to events
-    // Superclass provides two-way binding with Ember objects
-    App.sliderView = Cinder.SliderView.extend({
-      stop: function(event, slider) {
-        console.log('Slider changed to ' + slider.value);
-      }
-    });
   </script>
 
   <script type="text/x-handlebars">
+    {{view Cinder.AboutHdr}}
     {{view Cinder.SliderView valueObjectBinding="App.slider" class="slider"}}
     {{view Cinder.SliderView valueObjectBinding="App.slider" id="vertical-slider" orientation="vertical"}}
     <div id="slider-text-value">
@@ -41,6 +40,7 @@
     {{#view Em.Button id="reset-button" target="App.slider" action="reset"}}
       Reset
     {{/view}}
+    {{view Cinder.AboutFtr}}
   </script>
   
 </body>
