@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cinder - Progress Bar</title>
+  <script type="text/javascript" src="../lib/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery-ui-1.8.18.custom.min.js"></script>
+  <script type="text/javascript" src="../lib/ember.js"></script>
+  <script type="text/javascript" src="../lib/cinder.js"></script>
+  <LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
+  <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
+</head>
+<body>
+  <script language="javascript">
+    var App = Ember.Application.create();
+
+    // App specific subclass - for non-default options
+    // and reacting directly to events
+    App.progressBarView = Cinder.ProgressBarView.extend({
+      complete: function(event, ui) {
+        console.log('Progress Bar complete');
+      }
+    });
+
+    App.progress = Em.Object.create({
+      'value' : 50,
+      'reset' : function() {
+        this.set('value', 50);
+      },
+      'dec10' : function() {
+        cur = this.get('value');
+        (cur > 0) ? this.set('value', cur - 10) : this.set('value', cur);
+      },
+      'inc10' : function() {
+        cur = this.get('value');
+        (cur < 100) ? this.set('value', cur + 10) : this.set('value', cur);
+      }
+    });
+  </script>
+
+  <script type="text/x-handlebars">
+    {{view Cinder.AboutHdr}}
+    <h2 id="example-title">Progress Bar</h2>
+    {{view App.progressBarView valueObjectBinding="App.progress" class="examples-progress-bar"}}<br/>
+    {{view Cinder.ProgressBarView valueObjectBinding="App.progress" class="examples-progress-bar"}}
+    <span>Progress: </span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="tab-display">{{App.progress.value}}</span><br/><br/>
+    {{#view Em.Button target="App.progress" action="dec10"}}
+      - 10
+    {{/view}}
+    {{#view Em.Button target="App.progress" action="reset"}}
+      Reset
+    {{/view}}
+    {{#view Em.Button target="App.progress" action="inc10"}}
+      + 10
+    {{/view}}
+    {{view Cinder.AboutFtr}}
+  </script>
+  
+</body>
+</html>

@@ -6,12 +6,8 @@
   margin-left: 130px;
 }
 
-.todos-progress-bar {
+.examples-progress-bar {
   width: 400px;
-}
-
-.todos-progress-bar-small {
-  width: 200px;
 }
 
 #todos {
@@ -54,6 +50,11 @@
 #myaccordion .ui-accordion h2 {
   padding: 0px;
   width: 500px;
+}
+
+#tab-display {
+  color: #0074C7;
+  font-weight: 900;
 }
 
 button {
