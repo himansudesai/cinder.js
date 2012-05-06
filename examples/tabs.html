@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cinder - Accordion</title>
+  <script type="text/javascript" src="../lib/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery-ui-1.8.18.custom.min.js"></script>
+  <script type="text/javascript" src="../lib/ember.js"></script>
+  <script type="text/javascript" src="../lib/cinder.js"></script>
+  <LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
+  <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
+</head>
+<body>
+  <script language="javascript">
+    var App = Ember.Application.create();
+
+    App.food = [['Fruits', 'Apples, Bananas, Cherries'],['Vegetables', 'Asparagus, Broccoli, Carrots']];
+    App.spirits = [['Scotch', 'Glenlivet, Glenfiddich, Johnnie Walker'], ['Bourbon', 'WildTurkey, Jim Bean. Makers Mark']];
+    App.myTabs = Em.Object.create({
+      'content' : App.food,
+      'food' : function() {
+        this.set('content', App.food);
+      },
+      'spirits' : function() {
+        this.set('content', App.spirits);
+      }
+    }); 
+    App.myCurTab = Em.Object.create({
+      'value' : 0,
+      'tab1' : function() {
+        this.set('value', 0);
+      },
+      'tab2' : function() {
+        this.set('value', 1);
+      }
+    });
+  </script>
+
+  <script type="text/x-handlebars">
+    {{view Cinder.AboutHdr}}
+    <h2 id="example-title">Accordion</h2>
+    {{view Cinder.TabsView tabsBinding="App.myTabs" curTabBinding="App.myCurTab" id="my-tabs"}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Currently Selected Tab:&nbsp;&nbsp;{{App.myCurTab.value}}<br/><br/>
+    {{#view Em.Button target="App.myTabs" action="food"}}
+      Food
+    {{/view}}
+    {{#view Em.Button target="App.myTabs" action="spirits"}}
+      Spirits
+    {{/view}}
+    {{#view Em.Button target="App.myCurTab" action="tab1"}}
+      Tab 1
+    {{/view}}
+    {{#view Em.Button target="App.myCurTab" action="tab2"}}
+      Tab 2
+    {{/view}}
+    {{view Cinder.AboutFtr}}
+  </script>
+  
+</body>
+</html>

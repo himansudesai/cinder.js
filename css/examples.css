@@ -1,11 +1,5 @@
-#about-hdr, #about-ftr p {
-  width: 400px;
-  color: DimGrey;
-  text-align: justify;
-  font-size: 1em;
-  line-height: 1.25em;
-  margin: 1.25em 0;
-  text-align: justify;
+#example-title {
+  color: DarkGoldenRod;
 }
 #reset-button {
   margin: 10px;
@@ -72,3 +66,12 @@ button {
   width: 7em;
 }
 
+#about-hdr, #about-ftr p {
+  width: 400px;
+  color: DarkGrey;
+  text-align: justify;
+  font-size: 1.0em;
+  line-height: 1.25em;
+  margin: 2.0em 0;
+  text-align: justify;
+}

@@ -31,12 +31,13 @@
 
   <script type="text/x-handlebars">
     {{view Cinder.AboutHdr}}
+    <h2 id="example-title">Slider</h2>
     {{view Cinder.SliderView valueObjectBinding="App.slider" class="slider"}}
     {{view Cinder.SliderView valueObjectBinding="App.slider" id="vertical-slider" orientation="vertical"}}
     <div id="slider-text-value">
       {{App.slider.value}}
     </div>
-    {{view Cinder.SliderView valueObjectBinding="App.slider" class="slider"}}
+    {{view App.sliderView valueObjectBinding="App.slider" class="slider"}}
     {{#view Em.Button id="reset-button" target="App.slider" action="reset"}}
       Reset
     {{/view}}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cinder - Accordion</title>
+  <script type="text/javascript" src="../lib/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery-ui-1.8.18.custom.min.js"></script>
+  <script type="text/javascript" src="../lib/ember.js"></script>
+  <script type="text/javascript" src="../lib/cinder.js"></script>
+  <LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
+  <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
+</head>
+<body>
+  <script language="javascript">
+    var App = Ember.Application.create();
+
+    // App specific subclass - for non-default options
+    // and reacting directly to events
+    App.accordionView = Cinder.AccordionView.extend({
+      onChange: function(event, ui) {
+        console.log($(ui.newHeader).text());
+        console.log($(ui.newContent).text());
+      }
+    });
+
+    App.food = [['Fruits', 'Apples, Bananas, Cherries'],['Vegetables', 'Asparagus, Broccoli, Carrots']];
+    App.spirits = [['Scotch', 'Glenlivet, Glenfiddich, Johnnie Walker'], ['Bourbon', 'WildTurkey, Jim Bean. Makers Mark']];
+    App.myAccordion = Ember.Object.create({
+      'content' : App.food,
+      'food' : function() {
+        this.set('content', App.food);
+      },
+      'spirits' : function() {
+        this.set('content', App.spirits);
+      }
+    });
+  </script>
+
+  <script type="text/x-handlebars">
+    {{view Cinder.AboutHdr}}
+    <h2 id="example-title">Accordion</h2>
+    {{view App.accordionView valueObjectBinding="App.myAccordion" header="h2" class="myaccordion" collapsible=true autoHeight=true animated="bounceslide"}}
+    {{#view Em.Button target="App.myAccordion" action="food"}}
+      Food
+    {{/view}}
+    {{#view Em.Button target="App.myAccordion" action="spirits"}}
+      Spirits
+    {{/view}}
+    {{view Cinder.AboutFtr}}
+  </script>
+  
+</body>
+</html>
