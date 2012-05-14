@@ -3,9 +3,12 @@
 }
 #reset-button {
   margin: 10px;
-  margin-left: 130px;
+  margin-left: 110px;
 }
-
+#action-button-text {
+  color: Olive;
+  font-size: 80%;
+}
 .examples-progress-bar {
   width: 400px;
 }
