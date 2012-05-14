@@ -16,3 +16,5 @@ As of May 6 2012, the following widgets can be used through Cinder
 Not all events are supported (passed by Cinder to client code) - this will follow shortly.
 
 Support for other Widgets and Interactions is coming...
+
+The examples can be viewed online at himansudesai.github.com
