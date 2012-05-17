@@ -2,9 +2,9 @@
 <html>
 <head>
   <title>Cinder - Date Picker</title>
-  <script type="text/javascript" src="../lib/jquery-1.7.1.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery-ui-1.8.18.custom.min.js"></script>
-  <script type="text/javascript" src="../lib/ember.js"></script>
+  <script src="http://cloud.github.com/downloads/emberjs/ember.js/ember-0.9.7.min.js"></script>
   <script type="text/javascript" src="../lib/cinder.js"></script>
   <LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
   <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
@@ -35,6 +35,7 @@
   </script>
 
   <script type="text/x-handlebars">
+    <a href="../index.html" STYLE="font: 10pt courier; color: olive">Examples</a> <br/>
     {{view Cinder.AboutHdr}}
     <h2 id="example-title">Date Picker</h2>
     {{view App.datePickerView valueObjectBinding="App.someDate" class="date-field"}}
