@@ -18,6 +18,9 @@
     App.progressBarView = Cinder.ProgressBarView.extend({
       complete: function(event, ui) {
         console.log('Progress Bar complete');
+      },
+      change: function(event, ui) {
+        console.log('Progress Bar changed');
       }
     });
 
