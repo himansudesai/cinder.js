@@ -16,7 +16,7 @@
     // App specific subclass - for non-default options
     // and reacting directly to events
     App.accordionView = Cinder.AccordionView.extend({
-      onChange: function(event, ui) {
+      change: function(event, ui) {
         console.log($(ui.newHeader).text());
         console.log($(ui.newContent).text());
       }
@@ -40,7 +40,9 @@
   
     {{view Cinder.AboutHdr}}
     <h2 id="example-title">Accordion</h2>
-    {{view App.accordionView valueObjectBinding="App.myAccordion" header="h2" class="myaccordion" collapsible=true autoHeight=true animated="bounceslide"}}
+    {{view App.accordionView valueObjectBinding="App.myAccordion" header="h2"
+          class="myaccordion" collapsible=true active="-1" animated="bounceslide"
+          event="mouseover"}}
     {{#view Em.Button target="App.myAccordion" action="food"}}
       Food
     {{/view}}
@@ -51,6 +53,6 @@
     <span id="action-button-text">(use buttons to modify data model)</span>
     {{view Cinder.AboutFtr}}
   </script>
-  
+
 </body>
 </html>
