@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cinder - Sortable</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery-ui-1.8.18.custom.min.js"></script>
+  <script src="http://cloud.github.com/downloads/emberjs/ember.js/ember-0.9.7.min.js"></script>
+  <script type="text/javascript" src="../lib/cinder.js"></script>
+  <LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
+  <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
+</head>
+<body>
+  <script language="javascript">
+    var App = Ember.Application.create();
+
+    App.cars = Ember.ArrayProxy.create({ 
+      'content': Ember.A(['Accord', 'Bronco', 'Camaro', 'Dart', 'Explorer', 'Focus', 'Golf' ]),
+      contentDidChange: function(newArrayProxy) {   
+        if (newArrayProxy) {
+          console.log('current collection = ' + newArrayProxy.content);
+          console.log('element that moved = ' + this.dragInfo.item);
+          console.log('old item = ' + this.dragInfo.oldIndex);
+          console.log('new item = ' + this.dragInfo.newIndex);
+        }
+      },
+      move0To1 : function() {
+        this.move(0, 1);
+      },
+      move6To0 : function() {
+        this.move(6, 0);
+      }
+    });
+  </script>
+
+  <script type="text/x-handlebars">
+    <a href="../index.html" STYLE="font: 10pt courier; color: olive">Examples</a> <br/>
+    {{view Cinder.AboutHdr}}
+    <h2 id="example-title">Sortable</h2>
+    {{view Cinder.SortableView sortablesBinding="App.cars" id="my-sortables"}}
+    <br/>
+    <span class="results-label">App.cars = </span><span class="results">{{App.cars.content}}</span>
+    <br/>
+    <span class="results-label">Item that moved = </span><span class="results">{{App.cars.dragInfo.item}}</span>
+    <span class="results-label">From = </span><span class="results">{{App.cars.dragInfo.oldIndex}}</span>
+    <span class="results-label">To = </span><span class="results">{{App.cars.dragInfo.newIndex}}</span>
+    <br/>
+    {{#view Em.Button  target="App.cars" action="move0To1"}}
+      Pos 1 -> Pos 2
+    {{/view}}
+    {{#view Em.Button  target="App.cars" action="move6To0"}}
+      Pos 7 -> Pos 1
+    {{/view}}
+    {{view Cinder.AboutFtr}}
+  </script>
+</body>
+</html>

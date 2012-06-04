@@ -25,7 +25,9 @@
       'value': 50,
       'reset': function() {
         this.set('value', 50);
-      }
+      },
+      'valueObserver' : function() {
+      }.observes('value')
     });
   </script>
 

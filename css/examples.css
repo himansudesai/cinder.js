@@ -9,14 +9,23 @@
   color: Olive;
   font-size: 80%;
 }
+.results, .results-label {
+  font-family: courier;
+  font-size: 90%;
+  font-weight: bold;
+}
+.results-label {
+  color: Olive;
+}
+.results {
+  color: dodgerblue;
+}
 .examples-progress-bar {
   width: 400px;
 }
-
 #todos {
   width: 300px;
 }
-
 .myaccordion h2, .myaccordion .ui-accordion {
   padding: 0px;
   width: 500px;
@@ -31,6 +40,24 @@
 
 #my-tabs {
   width: 500px;
+}
+
+#my-sortables {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 250px;
+}
+#my-sortables li {
+  margin: 0 3px 3px 3px;
+  padding: 0.4em;
+  padding-left: 1.5em;
+  font-size: 1.4em;
+  height: 18px;
+}
+#my-sortables li span {
+  position: absolute;
+  margin-left: -1.3em;
 }
 
 .slider {
@@ -74,7 +101,7 @@ button {
   width: 400px;
   color: DarkGrey;
   text-align: justify;
-  font-size: 1.0em;
+  font-size: 80%;
   line-height: 1.25em;
   margin: 2.0em 0;
   text-align: justify;
