@@ -13,15 +13,15 @@
   <script language="javascript">
     var App = Ember.Application.create();
 
-    App.food = [['Fruits', 'Apples, Bananas, Cherries'],['Vegetables', 'Asparagus, Broccoli, Carrots']];
-    App.spirits = [['Scotch', 'Glenlivet, Glenfiddich, Johnnie Walker'], ['Bourbon', 'WildTurkey, Jim Bean. Makers Mark']];
+    App.dogs = [['Labrador', '<img src="images/lab.jpg" alt="Lab" />'],['Terrier', '<img src="images/terrier.jpg" alt="Terrier" />'],['Malamute', '<img src="images/malamute.jpg" alt="Malamute" />'],['Beagle', '<img src="images/beagle.jpg" alt="Beagle" />']];
+    App.cats = [['Persian', '<img src="images/persian.jpg" alt="Persian" />'],['Toyger', '<img src="images/toyger.jpg" alt="Terrier" />'],['Tabby', '<img src="images/tabby.jpg" alt="Malamute" />'],['Serengeti', '<img src="images/serengeti.jpg" alt="Beagle" />']];
     App.myTabs = Em.Object.create({
-      'content' : App.food,
-      'food' : function() {
-        this.set('content', App.food);
+      'content' : App.dogs,
+      'dogs' : function() {
+        this.set('content', App.dogs);
       },
-      'spirits' : function() {
-        this.set('content', App.spirits);
+      'cats' : function() {
+        this.set('content', App.cats);
       }
     }); 
     App.curTab = Em.Object.create({
@@ -41,11 +41,11 @@
     <h2 id="example-title">Tabs</h2>
     {{view Cinder.TabsView tabsBinding="App.myTabs" curTabBinding="App.curTab" id="my-tabs"}}
     <span>Currently Selected Tab</span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="tab-display">{{App.curTab.value}}</span><br/><br/>
-    {{#view Em.Button target="App.myTabs" action="food"}}
-      Food
+    {{#view Em.Button target="App.myTabs" action="dogs"}}
+      Dogs
     {{/view}}
-    {{#view Em.Button target="App.myTabs" action="spirits"}}
-      Spirits
+    {{#view Em.Button target="App.myTabs" action="cats"}}
+      Cats
     {{/view}}
     {{#view Em.Button target="App.curTab" action="tab0"}}
       Tab 0
