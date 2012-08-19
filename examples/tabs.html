@@ -13,8 +13,24 @@
   <script language="javascript">
     var App = Ember.Application.create();
 
-    App.dogs = [['Labrador', '<img src="images/lab.jpg" alt="Lab" />'],['Terrier', '<img src="images/terrier.jpg" alt="Terrier" />'],['Malamute', '<img src="images/malamute.jpg" alt="Malamute" />'],['Beagle', '<img src="images/beagle.jpg" alt="Beagle" />']];
-    App.cats = [['Persian', '<img src="images/persian.jpg" alt="Persian" />'],['Toyger', '<img src="images/toyger.jpg" alt="Terrier" />'],['Tabby', '<img src="images/tabby.jpg" alt="Malamute" />'],['Serengeti', '<img src="images/serengeti.jpg" alt="Beagle" />']];
+    App.dogs = [
+        ['Labrador', '<img src="images/lab.jpg" alt="Lab" />'
+        ],
+        ['Terrier', '<img src="images/terrier.jpg" alt="Terrier" />'],
+        ['Malamute', '<img src="images/malamute.jpg" alt="Malamute" />'],
+        ['Beagle', '<img src="images/beagle.jpg" alt="Beagle" />']
+    ];
+    App.cats = [
+        ['Persian', '<img src="images/persian.jpg" alt="Persian" />'],
+        ['Toyger', '<img src="images/toyger.jpg" alt="Terrier" />'],
+        ['Tabby', '<img src="images/tabby.jpg" alt="Malamute" />'],
+        ['Serengeti',
+          '<div>' +
+            '<img src="images/serengeti.jpg" alt="Beagle" /> <br/>' +
+            '<span class="indianred">I am scared. Where is my mommy?</span>' +
+          '</div>'
+        ]
+    ];
     App.myTabs = Em.Object.create({
       'content' : App.dogs,
       'dogs' : function() {
