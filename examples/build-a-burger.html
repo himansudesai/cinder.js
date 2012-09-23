@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Build a Burger</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery-ui-1.8.18.custom.min.js"></script>
+  <script src="http://cloud.github.com/downloads/emberjs/ember.js/ember-0.9.8.min.js"></script>
+  <script type="text/javascript" src="../lib/cinder.js"></script>
+  <script type="text/javascript" src="../lib/bootstrap.js"></script>
+  <LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
+  <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
+  <LINK REL=StyleSheet HREF="../css/bootstrap.css" TYPE="text/css" MEDIA=screen>
+</head>
+
+<body>
+  <script language="javascript">
+    var App = Ember.Application.create();
+
+    App.selectedIngredients = Ember.ArrayProxy.create({ 
+      'content': Ember.A([]),
+      contentDidChange: function(newArrayProxy) {
+        if (newArrayProxy && this.dragInfo.item) {
+          console.log('current ingredients = ' + newArrayProxy.content);
+          console.log(this.dragInfo.item + ' moved from ' + this.dragInfo.oldIndex + ' to ' + this.dragInfo.newIndex);
+        }
+      }
+    });
+
+    App.ingredientsView = Ember.CollectionView.create({
+      classNames: ["css-cell ingredients-table-cell"],
+      childViews: [],
+      sortAndAdd: function(newElement) {
+        var size = App.ingredientsView.get("childViews").length;
+        var childViews = App.ingredientsView.get("childViews");
+        var ingredientNames = [];
+        for (var i=0; i<size; i++) {
+          ingredientNames.pushObject(childViews[0].get('name'));
+          childViews.removeObject(childViews[0]);
+        }
+        ingredientNames.pushObject(newElement);
+        ingredientNames = ingredientNames.sort();
+        ingredientNames.forEach(function(ele, idx) {
+          childViews.pushObject(App.ItemView.create({ name: ele }));  
+        });
+      }
+    });    
+
+    App.ItemView = Cinder.DraggableView.extend({
+      template: Ember.Handlebars.compile('{{name}}'),
+      classNames: ["ingredient-item"],
+      revert: 'invalid'
+    });
+
+    var ingredients = ['Bottom Bun', 'Lettuce', 'Onions', 'Tomatoes', 'Bacon Strips', 'Fried Egg', 'Guacamole', 'Ketchup', 'Mustard', 'Mayo', 'Patty', 'Pickles', 'Jalapenos', 'Top Bun', 'Cheese', 'Seasonings'].sort();
+    ingredients.forEach(function(ele, idx){
+      App.ingredientsView.get("childViews").pushObject(App.ItemView.create({ name: ele }));  
+    });
+
+    App.DroppableView = Cinder.DroppableView.extend({
+      template: Ember.Handlebars.compile('{{view Cinder.SortableView sortablesBinding="App.selectedIngredients" id="selected-ingredients"}}'),
+      classNames: ["css-cell ingredients-table-cell"],
+      drop: function(event, draggableView) {
+        if (draggableView != null) {
+          draggableView.destroyElement();
+          var children = App.ingredientsView.get("childViews");
+          var itemIndex = children.indexOf(draggableView);
+          children.splice(itemIndex, 1);
+          var oldIngredients = App.selectedIngredients.get('content');
+          var newIngredients = [];
+          for (var idx=0; idx<oldIngredients.length; idx++) {
+            newIngredients.pushObject(oldIngredients[idx]);
+          }
+          newIngredients.pushObject(draggableView.get('name') + '<span class="icon-remove" id="' + draggableView.get('name').replace(' ', '__') + '"></span>');
+          App.selectedIngredients.set('content', newIngredients);
+        }
+      },
+      removeItem: function(item) {
+        var oldIngredients = App.selectedIngredients.get('content');
+        var newIngredients = [];
+        for (var idx=0; idx<oldIngredients.length; idx++) {
+          var originalItem = oldIngredients[idx].substring(0, oldIngredients[idx].indexOf('<span'));
+          if (item != originalItem) {
+            newIngredients.pushObject(oldIngredients[idx]);
+          }
+        }
+        App.selectedIngredients.set('content', newIngredients);
+      }
+    });
+
+    App.droppableView = App.DroppableView.create();
+  </script>
+
+  <div class="css-table" id="yattribute-table">
+    <div class="css-cell ingredients-table-cell">
+      <span class="title">INGREDIENTS (drag right to include in Recipe )</span>
+    </div>
+    <div class="css-cell ingredients-table-cell">
+      <span class="title">BURGER (drag/sort to change ingredient layering order. Click on icon at right to remove an ingredient from the Recipe)</span>
+    </div>
+    <div class="css-row">
+    </div>
+  </div>
+
+  <script language="javascript">
+    App.ingredientsView.appendTo("#yattribute-table");
+    App.droppableView.appendTo("#yattribute-table");
+    $("#selected-ingredients li").live({
+      mouseenter: function() { $("#" + this.textContent.replace(' ', '__')).addClass("highlight-x"); },
+      mouseleave: function() { $("#" + this.textContent.replace(' ', '__')).removeClass("highlight-x"); },
+      mouseup: function() { $("#" + this.textContent.replace(' ', '__')).removeClass("highlight-x"); },
+      mousedown: function() { $("#" + this.textContent.replace(' ', '__')).removeClass("highlight-x"); }
+    });
+    $(".icon-remove").live({ click: function(event) {
+      var tar = event.target || event.toElement;
+      App.droppableView.removeItem( tar.id.replace('__', ' '));
+      App.ingredientsView.sortAndAdd( tar.id.replace('__', ' '));
+    }});
+  </script>
+
+</body>
+</html>

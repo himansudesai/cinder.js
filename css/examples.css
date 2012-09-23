@@ -93,13 +93,11 @@
 button {
   background: url('images/ui-bg_gloss-wave_70_ffdd57_500x100.png') repeat-x;
 }
-
 .date-field input {
   background-color: darkgoldenrod;
   color: white;
   width: 7em;
 }
-
 #about-hdr, #about-ftr p {
   width: 400px;
   color: DarkGrey;
@@ -108,4 +106,47 @@ button {
   line-height: 1.25em;
   margin: 2.0em 0;
   text-align: justify;
+}
+.css-table {
+  display: table;
+}
+.css-row {
+  display: table-row;
+}
+.css-cell {
+  display: table-cell;
+}
+.ingredient-item {
+  background-color: palegoldenrod;
+  padding: 1px;
+  margin: 1px;
+}
+.ingredients-table-cell {
+  border: 1px solid lightsteelblue;
+  width: 300px;
+}
+#selected-ingredients {
+  list-style-type: none;
+  margin: 1px;
+  -webkit-padding-start: 0px;
+}
+.delete-ingredient {
+  float: right;
+  opacity: 0.3;
+}
+#selected-ingredients li {
+  padding: 1px;
+  margin: 1px;
+  border: none;
+}
+.title {
+  font-size: smaller;
+  font-weight: bold;
+}
+.icon-remove {
+  float: right;
+  opacity: 0.3;
+}
+.highlight-x {
+  opacity: 0.7;
 }
