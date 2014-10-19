@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cinder - Slider (Ember Component)</title>
+<script src="../lib/jquery-1.10.2.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+<script src="../lib/handlebars-1.0.0.js"></script>
+<script src="../lib/ember-1.7.0.js"></script>
+<script type="text/javascript" src="../lib/cinder-components.js"></script>
+<LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
+<LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
+</head>
+<body>
+  <script language="javascript">
+    var App = Ember.Application.create({LOG_TRANSITIONS: true});
+    Cinder.hookupComponents(App);
+
+    App.slider = Em.Object.create({
+      'value': 50,
+      'reset': function() {
+        console.log("inner reset");
+        this.set('value', 50);
+      }
+    });
+
+    App.ApplicationController = Ember.Controller.extend({
+      actions: {
+        resetSlider: function() {
+          console.log("RESET CALLED");
+          App.slider.reset();
+        },
+        slider1HasStopped: function() {
+          console.log("Slider 1 has stopped sliding");
+        },
+      }
+    });
+
+  </script>
+
+  <script type="text/x-handlebars">
+    <a href="../index.html" STYLE="font: 10pt courier; color: olive">Examples</a> <br/>
+    {{view Cinder.AboutHdr}}
+    <h2 id="example-title">Slider (Ember Component)</h2>
+    {{cinder-jqui-slider valueObjectBinding="App.slider" stop="slider1HasStopped"}}
+    {{cinder-jqui-slider valueObjectBinding="App.slider" id="vertical-slider" orientation="vertical"}}
+    <div id="slider-text-value">
+      {{App.slider.value}}
+    </div>
+    {{ cinder-jqui-slider valueObjectBinding="App.slider"}}
+    <br/>
+    <button id="reset-button" {{action "resetSlider"}}>
+      Reset Slider Value
+    </button>
+    {{view Cinder.AboutFtr}}
+  </script>
+
+</body>
+</html>

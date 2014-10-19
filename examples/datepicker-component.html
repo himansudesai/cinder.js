@@ -6,30 +6,32 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
   <script src="../lib/handlebars-1.0.0.js"></script>
   <script src="../lib/ember-1.7.0.js"></script>
-  <script type="text/javascript" src="../lib/cinder.js"></script>
+  <script type="text/javascript" src="../lib/cinder-components.js"></script>
   <LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
   <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
 </head>
 <body>
   <script language="javascript">
-    var App = Ember.Application.create();
+    var App = Ember.Application.create({LOG_TRANSITIONS: true});
+    Cinder.hookupComponents(App);
 
     // App specific subclass - for non-default options
     // and reacting directly to events
-    App.datePickerView = Cinder.DatePickerView.extend({
-      onClose: function(dateText, inst) {
-        console.log('Date = ' + dateText + ' this = ' + this);
-      },
-      changeYear: true,
-      changeMonth: true,
-      onChangeMonthYear: function(year, month, inst) {
-        console.log('CHANGED ' + year + ' ' + month);
-      }
-    });
+    // App.datePickerView = Cinder.DatePickerView.extend({
+    //   onClose: function(dateText, inst) {
+    //     console.log('Date = ' + dateText + ' this = ' + this);
+    //   },
+    //   changeYear: true,
+    //   changeMonth: true,
+    //   onChangeMonthYear: function(year, month, inst) {
+    //     console.log('CHANGED ' + year + ' ' + month);
+    //   }
+    // });
 
     App.someDate = Em.Object.create({
       'value': '01/01/2012',
       'reset': function() {
+        console.log("resetting date");
         this.set('value', '01/01/2012')
       }
     });
@@ -47,8 +49,8 @@
     <a href="../index.html" STYLE="font: 10pt courier; color: olive">Examples</a> <br/>
     {{view Cinder.AboutHdr}}
     <h2 id="example-title">Date Picker</h2>
-    {{view App.datePickerView valueObjectBinding="App.someDate" class="date-field"}}
-    {{view Cinder.DatePickerView valueObjectBinding="App.someDate" class="date-field"}}
+    {{cinder-jqui-datepicker valueObjectBinding="App.someDate" class="date-field"}}
+    {{cinder-jqui-datepicker valueObjectBinding="App.someDate" class="date-field"}}
     <br/><button {{action "resetDate"}}>
       Reset Data
     </button>

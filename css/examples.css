@@ -32,6 +32,12 @@
 .myaccordion h2, .myaccordion .ui-accordion {
   padding: 0px;
   width: 500px;
+  margin-bottom: 3px;
+  height: 50px;
+}
+
+#my-tabs {
+  width: 500px;
 }
 
 .myaccordion .ui-accordion-content{
@@ -39,10 +45,11 @@
   padding-bottom: 10px;
   padding-left: 35px;
   width: 427px;
+  height: 360px !important;
 }
 
-#my-tabs {
-  width: 500px;
+.ui-accordion .ui-accordion-header a {
+  padding-left: 40px;
 }
 
 #my-sortables {
@@ -74,6 +81,7 @@
 
 #vertical-slider {
   height: 150px;
+  width: 0.8em;
 }
 
 #spacer {

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cinder - Tabs (Ember Component)</title>
+<script src="../lib/jquery-1.10.2.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+<script src="../lib/handlebars-1.0.0.js"></script>
+<script src="../lib/ember-1.7.0.js"></script>
+<script type="text/javascript" src="../lib/cinder-components.js"></script>
+<LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
+<LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
+</head>
+<body>
+  <script language="javascript">
+    var App = Ember.Application.create({LOG_TRANSITIONS: true});
+    Cinder.hookupComponents(App);
+
+    App.dogs = [
+        ['Labrador', '<img src="images/lab.jpg" alt="Lab" />'
+        ],
+        ['Terrier', '<img src="images/terrier.jpg" alt="Terrier" />'],
+        ['Malamute', '<img src="images/malamute.jpg" alt="Malamute" />'],
+        ['Beagle', '<img src="images/beagle.jpg" alt="Beagle" />']
+    ];
+    App.cats = [
+        ['Persian', '<img src="images/persian.jpg" alt="Persian" />'],
+        ['Toyger', '<img src="images/toyger.jpg" alt="Terrier" />'],
+        ['Tabby', '<img src="images/tabby.jpg" alt="Malamute" />'],
+        ['Serengeti',
+          '<div>' +
+            '<img src="images/serengeti.jpg" alt="Beagle" /> <br/>' +
+            '<span class="indianred">I am scared. Where is my mommy?</span>' +
+          '</div>'
+        ]
+    ];
+    App.myTabs = Em.Object.create({
+      'content' : App.dogs
+    });
+    App.curTab = Em.Object.create({
+      'value' : 0
+    });
+
+    App.ApplicationController = Ember.Controller.extend({
+      actions: {
+        dogs: function() {
+          App.myTabs.set('content', App.dogs);
+        },
+        cats: function() {
+          App.myTabs.set('content', App.cats);
+        },
+        tab0: function() {
+          App.curTab.set('value', 0);
+        },
+        tab1: function() {
+          App.curTab.set('value', 1);
+        }
+      }
+    });
+
+    // App.Router.map(function() {
+    //   this.route('nonexistent', {path: '/tabs*'});
+    // });
+
+
+  </script>
+
+  <script type="text/x-handlebars">
+    <a href="../index.html" STYLE="font: 10pt courier; color: olive">Examples</a> <br/>
+    {{view Cinder.AboutHdr}}
+    <h2 id="example-title">Tabs (Ember Component)</h2>
+    {{cinder-jqui-tabs tabsBinding="App.myTabs" curTabBinding="App.curTab" id="my-tabs"}}
+    <span>Currently Selected Tab</span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="tab-display">{{App.curTab.value}}</span><br/><br/>
+    <button {{action "dogs"}}>
+      Dogs
+    </button>
+    <button {{action "cats"}}>
+      Cats
+    </button>
+    <button {{action "tab0"}}>
+      Tab 0
+    </button>
+    <button {{action "tab1"}}>
+      Tab 1
+    </button>
+    <br/>
+    <span id="action-button-text">(use buttons to modify data model)</span>
+    {{view Cinder.AboutFtr}}
+  </script>
+
+</body>
+</html>

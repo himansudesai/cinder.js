@@ -1,27 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Cinder - Accordion</title>
-  <script src="../lib/jquery-1.10.2.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
-  <script src="../lib/handlebars-1.0.0.js"></script>
-  <script src="../lib/ember-1.7.0.js"></script>
-  <script type="text/javascript" src="../lib/cinder.js"></script>
-  <LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
-  <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
+<title>Cinder - Accordian (Ember Component)</title>
+<script src="../lib/jquery-1.10.2.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+<script src="../lib/handlebars-1.0.0.js"></script>
+<script src="../lib/ember-1.7.0.js"></script>
+<script type="text/javascript" src="../lib/cinder-components.js"></script>
+<LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
+<LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
 </head>
 <body>
   <script language="javascript">
-    var App = Ember.Application.create();
-
-    // App specific subclass - for non-default options
-    // and reacting directly to events
-    App.accordionView = Cinder.AccordionView.extend({
-      change: function(event, ui) {
-        console.log($(ui.newHeader).text());
-        console.log($(ui.newContent).text());
-      }
-    });
+    var App = Ember.Application.create({LOG_TRANSITIONS: true});
+    Cinder.hookupComponents(App);
 
     App.dogs = [
         ['Labrador', '<img src="images/lab.jpg" alt="Lab" />'
@@ -59,6 +51,9 @@
         },
         dogs: function() {
           App.myAccordion.dogs();
+        },
+        accordionChanged: function() {
+          console.log("The accordion has apparently changed");
         }
       }
     });
@@ -67,11 +62,10 @@
 
   <script type="text/x-handlebars">
     <a href="../index.html" STYLE="font: 10pt courier; color: olive">Examples</a> <br/>
-
     {{view Cinder.AboutHdr}}
-    <h2 id="example-title">Accordion (Ember View)</h2>
-    {{view App.accordionView valueObjectBinding="App.myAccordion" header="h2"
-          class="myaccordion" collapsible=true active="-1" animated="bounceslide"}}
+    <h2 id="example-title">Accordion (Ember Component)</h2>
+    {{cinder-jqui-accordion valueObjectBinding="App.myAccordion" header="h2"
+          class="myaccordion" collapsible=true active="-1" animated="bounceslide" change="accordionChanged"}}
     <br/>
     <button id="dogs-button" {{action "dogs"}}>
       Dogs
