@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cinder - Autocomplete (Ember Component)</title>
+<script src="../lib/jquery-1.10.2.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+<script src="../lib/handlebars-1.0.0.js"></script>
+<script src="../lib/ember-1.7.0.js"></script>
+<script type="text/javascript" src="../lib/cinder.js"></script>
+<LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
+<LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
+</head>
+<body>
+  <script language="javascript">
+    var App = Ember.Application.create({LOG_TRANSITIONS: true});
+    Cinder.hookupComponents(App);
+
+    var initialLangs = [
+        "ActionScript",
+        "AppleScript",
+        "Asp",
+        "BASIC",
+        "C",
+        "C++",
+        "Clojure",
+        "COBOL",
+        "ColdFusion",
+        "Erlang",
+        "Fortran",
+        "Groovy",
+        "Haskell",
+        "Java",
+        "JavaScript",
+        "Lisp",
+        "Perl",
+        "PHP",
+        "Python",
+        "Ruby",
+        "Scala",
+        "Scheme"
+      ];
+
+    App.languages = Ember.ArrayProxy.create({ content: Ember.A(initialLangs) });
+
+    App.selectedItem = Ember.Object.create({
+      value: ''
+    });
+
+    App.ApplicationController = Ember.Controller.extend({
+      actions: {
+        addGoAndRust: function() {
+          App.languages.set('content', initialLangs.concat(['Go', 'Rust']));
+        }
+      }
+    });
+
+  </script>
+
+  <script type="text/x-handlebars">
+    <a href="../index.html" STYLE="font: 10pt courier; color: olive">Examples</a> <br/>
+    {{view Cinder.AboutHdr}}
+    <h2 id="example-title">Autocomplete (Ember Component)</h2>
+    {{cinder-jqui-autocomplete itemsBinding="App.languages" selectedItemBinding="App.selectedItem"}}
+    <br/>
+    <label>Current Selection</label>&nbsp;&nbsp;{{App.selectedItem.value}}
+    <br/><button {{action "addGoAndRust"}}>
+      Add Go&Rust
+    </button>
+    {{view Cinder.AboutFtr}}
+  </script>
+
+</body>
+</html>
