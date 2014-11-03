@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cinder - Slider (Ember Component)</title>
+<script src="../lib/jquery-1.10.2.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+<script src="../lib/handlebars-1.0.0.js"></script>
+<script src="../lib/ember-1.7.0.js"></script>
+<script type="text/javascript" src="../lib/cinder.js"></script>
+<LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
+<LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
+</head>
+<body>
+  <script language="javascript">
+    var App = Ember.Application.create({LOG_TRANSITIONS: true});
+    Cinder.hookupComponents(App);
+
+    App.greeting = Em.Object.create({
+      'label': 'Hello',
+      'greeting': 'Hello, how are you?',
+      click: function() {
+        alert(this.get('greeting'));
+      },
+      modify: function() {
+        this.set('label', 'Hello... Newman!');
+        this.set('greeting', "It didn't do it!");
+      }
+    });
+
+    App.modifyGreeting = Em.Object.create({
+      'label': 'Modify Greeting',
+      click: function() {
+        App.greeting.modify();
+      }
+    });
+
+  </script>
+
+  <script type="text/x-handlebars">
+    <a href="../index.html" STYLE="font: 10pt courier; color: olive">Examples</a> <br/>
+    {{view Cinder.AboutHdr}}
+    <h2 id="example-title">Button (Ember Component)</h2>
+    {{cinder-jqui-button buttonBinding="App.greeting"}}
+    <br/>
+    {{cinder-jqui-button buttonBinding="App.modifyGreeting"}}
+    <p style="color: Olive; font-style: italic">(click the top button before/after clicking the bottom button)</p>
+    {{view Cinder.AboutFtr}}
+  </script>
+
+</body>
+</html>
