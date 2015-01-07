@@ -5,7 +5,7 @@
   <script src="../lib/jquery-1.10.2.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
   <script src="../lib/handlebars-1.0.0.js"></script>
-  <script src="../lib/ember-1.7.0.js"></script>
+  <script src="http://builds.emberjs.com/canary/ember.debug.js"></script>
   <script type="text/javascript" src="../lib/cinder.js"></script>
   <LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
   <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
@@ -14,19 +14,6 @@
   <script language="javascript">
     var App = Ember.Application.create({LOG_TRANSITIONS: true});
     Cinder.hookupComponents(App);
-
-    // App specific subclass - for non-default options
-    // and reacting directly to events
-    // App.datePickerView = Cinder.DatePickerView.extend({
-    //   onClose: function(dateText, inst) {
-    //     console.log('Date = ' + dateText + ' this = ' + this);
-    //   },
-    //   changeYear: true,
-    //   changeMonth: true,
-    //   onChangeMonthYear: function(year, month, inst) {
-    //     console.log('CHANGED ' + year + ' ' + month);
-    //   }
-    // });
 
     App.someDate = Em.Object.create({
       'value': '01/01/2012',
@@ -37,6 +24,7 @@
     });
 
     App.ApplicationController = Ember.Controller.extend({
+      someDate: App.someDate,
       actions: {
         resetDate: function() {
           App.someDate.reset();
@@ -47,14 +35,14 @@
 
   <script type="text/x-handlebars">
     <a href="../index.html" STYLE="font: 10pt courier; color: olive">Examples</a> <br/>
-    {{view Cinder.AboutHdr}}
+    {{cinder-about-header}}
     <h2 id="example-title">Date Picker</h2>
-    {{cinder-jqui-datepicker valueObjectBinding="App.someDate" class="date-field"}}
-    {{cinder-jqui-datepicker valueObjectBinding="App.someDate" class="date-field"}}
+    {{cinder-jqui-datepicker valueObjectBinding="someDate" class="date-field"}}
+    {{cinder-jqui-datepicker valueObjectBinding="someDate" class="date-field"}}
     <br/><button {{action "resetDate"}}>
       Reset Date
     </button>
-    {{view Cinder.AboutFtr}}
+    {{cinder-about-footer}}
   </script>
 
 </body>

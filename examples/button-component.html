@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Cinder - Slider (Ember Component)</title>
-<script src="../lib/jquery-1.10.2.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
-<script src="../lib/handlebars-1.0.0.js"></script>
-<script src="../lib/ember-1.7.0.js"></script>
-<script type="text/javascript" src="../lib/cinder.js"></script>
-<LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
-<LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
+  <title>Cinder - Button (Ember Component)</title>
+  <script src="../lib/jquery-1.10.2.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+  <script src="../lib/handlebars-1.0.0.js"></script>
+  <script src="http://builds.emberjs.com/canary/ember.debug.js"></script>
+  <script type="text/javascript" src="../lib/cinder.js"></script>
+  <LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
+  <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
 </head>
 <body>
   <script language="javascript">
@@ -23,7 +23,7 @@
       },
       modify: function() {
         this.set('label', 'Hello... Newman!');
-        this.set('greeting', "It didn't do it!");
+        this.set('greeting', "Perhaps your invitation was ....\"Lost in the Mail\"");
       }
     });
 
@@ -34,17 +34,22 @@
       }
     });
 
+    App.ApplicationController = Ember.Controller.extend({
+      greeting: App.greeting,
+      modifyGreeting: App.modifyGreeting
+    });
+
   </script>
 
   <script type="text/x-handlebars">
     <a href="../index.html" STYLE="font: 10pt courier; color: olive">Examples</a> <br/>
-    {{view Cinder.AboutHdr}}
+    {{cinder-about-header}}
     <h2 id="example-title">Button (Ember Component)</h2>
-    {{cinder-jqui-button buttonBinding="App.greeting"}}
+    {{cinder-jqui-button buttonBinding="greeting"}}
     <br/>
-    {{cinder-jqui-button buttonBinding="App.modifyGreeting"}}
+    {{cinder-jqui-button buttonBinding="modifyGreeting"}}
     <p style="color: Olive; font-style: italic">(click the top button before/after clicking the bottom button)</p>
-    {{view Cinder.AboutFtr}}
+    {{cinder-about-footer}}
   </script>
 
 </body>

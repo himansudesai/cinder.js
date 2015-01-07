@@ -2,13 +2,13 @@
 <html>
 <head>
 <title>Cinder - Accordian (Ember Component)</title>
-<script src="../lib/jquery-1.10.2.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
-<script src="../lib/handlebars-1.0.0.js"></script>
-<script src="../lib/ember-1.7.0.js"></script>
-<script type="text/javascript" src="../lib/cinder.js"></script>
-<LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
-<LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
+  <script src="../lib/jquery-1.10.2.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+  <script src="../lib/handlebars-1.0.0.js"></script>
+  <script src="http://builds.emberjs.com/canary/ember.debug.js"></script>
+  <script type="text/javascript" src="../lib/cinder.js"></script>
+  <LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
+  <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
 </head>
 <body>
   <script language="javascript">
@@ -45,6 +45,7 @@
     });
 
     App.ApplicationController = Ember.Controller.extend({
+      accordion: App.myAccordion,
       actions: {
         cats: function() {
           App.myAccordion.cats();
@@ -62,9 +63,9 @@
 
   <script type="text/x-handlebars">
     <a href="../index.html" STYLE="font: 10pt courier; color: olive">Examples</a> <br/>
-    {{view Cinder.AboutHdr}}
+    {{cinder-about-header}}
     <h2 id="example-title">Accordion (Ember Component)</h2>
-    {{cinder-jqui-accordion valueObjectBinding="App.myAccordion" header="h2"
+    {{cinder-jqui-accordion valueObjectBinding="accordion" header="h2"
           class="myaccordion" collapsible=true active="-1" animated="bounceslide" change="accordionChanged"}}
     <br/>
     <button id="dogs-button" {{action "dogs"}}>
@@ -75,7 +76,7 @@
     </button>
     <br/>
     <span id="action-button-text">(use buttons to modify data model)</span>
-    {{view Cinder.AboutFtr}}
+    {{cinder-about-footer}}
   </script>
 
 </body>

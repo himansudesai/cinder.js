@@ -2,12 +2,14 @@
 <html>
 <head>
   <title>Cinder - Tabs (Ember View)</title>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="../lib/jquery-1.10.2.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
-  <script src="http://cloud.github.com/downloads/emberjs/ember.js/ember-0.9.7.min.js"></script>
+  <script src="../lib/handlebars-1.0.0.js"></script>
+  <script src="../lib/ember-1.7.0.js"></script>
   <script type="text/javascript" src="../lib/cinder.js"></script>
   <LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
   <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
+
 </head>
 <body>
   <script language="javascript">
@@ -49,6 +51,19 @@
         this.set('value', 1);
       }
     });
+
+    App.ApplicationController = Ember.Controller.extend({
+      actions: {
+        cats: function() {
+          App.myTabs.cats();
+        },
+        dogs: function() {
+          App.myTabs.dogs();
+        }
+      }
+    });
+
+
   </script>
 
   <script type="text/x-handlebars">
@@ -57,18 +72,19 @@
     <h2 id="example-title">Tabs (Ember View)</h2>
     {{view Cinder.TabsView tabsBinding="App.myTabs" curTabBinding="App.curTab" id="my-tabs"}}
     <span>Currently Selected Tab</span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="tab-display">{{App.curTab.value}}</span><br/><br/>
-    {{#view Em.Button target="App.myTabs" action="dogs"}}
+
+    <button {{action "dogs"}}>
       Dogs
-    {{/view}}
-    {{#view Em.Button target="App.myTabs" action="cats"}}
+    </button>
+    <button {{action "cats"}}>
       Cats
-    {{/view}}
-    {{#view Em.Button target="App.curTab" action="tab0"}}
+    </button>
+    <button {{action "tab0"}}>
       Tab 0
-    {{/view}}
-    {{#view Em.Button target="App.curTab" action="tab1"}}
+    </button>
+    <button {{action "tab1"}}>
       Tab 1
-    {{/view}}
+    </button>
     <br/>
     <span id="action-button-text">(use buttons to modify data model)</span>
     {{view Cinder.AboutFtr}}

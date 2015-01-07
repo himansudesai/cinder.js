@@ -2,35 +2,32 @@
 <html>
 <head>
 <title>Cinder - ProgressBar (Ember Component)</title>
-<script src="../lib/jquery-1.10.2.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
-<script src="../lib/handlebars-1.0.0.js"></script>
-<script src="../lib/ember-1.7.0.js"></script>
-<script type="text/javascript" src="../lib/cinder.js"></script>
-<LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
-<LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
+  <script src="../lib/jquery-1.10.2.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+  <script src="../lib/handlebars-1.0.0.js"></script>
+  <script src="http://builds.emberjs.com/canary/ember.debug.js"></script>
+  <script type="text/javascript" src="../lib/cinder.js"></script>
+  <LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
+  <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
 </head>
 <body>
   <script language="javascript">
     var App = Ember.Application.create({LOG_TRANSITIONS: true});
     Cinder.hookupComponents(App);
 
-    App.progress = Em.Object.create({
-      'value' : 50
-    });
-
     App.ApplicationController = Ember.Controller.extend({
+      progress: Em.Object.create({value: 50}),
       actions: {
         'dec10' : function() {
-          cur = App.progress.get('value');
-          (cur > 0) ? App.progress.set('value', cur - 10) : App.progress.set('value', cur);
+          cur = this.progress.get('value');
+          (cur > 0) ? this.progress.set('value', cur - 10) : this.progress.set('value', cur);
         },
         'inc10' : function() {
-          cur = App.progress.get('value');
-          (cur < 100) ? App.progress.set('value', cur + 10) : App.progress.set('value', cur);
+          cur = this.progress.get('value');
+          (cur < 100) ? this.progress.set('value', cur + 10) : this.progress.set('value', cur);
         },
         'reset' : function() {
-          App.progress.set('value', 50);
+          this.progress.set('value', 50);
         }
       }
     });
@@ -39,11 +36,11 @@
 
   <script type="text/x-handlebars">
     <a href="../index.html" STYLE="font: 10pt courier; color: olive">Examples</a> <br/>
-    {{view Cinder.AboutHdr}}
+    {{cinder-about-header}}
     <h2 id="example-title">Progress Bar</h2>
-    {{cinder-jqui-progressbar valueObjectBinding="App.progress" class="examples-progress-bar"}}<br/>
-    {{cinder-jqui-progressbar valueObjectBinding="App.progress" class="examples-progress-bar"}}
-    <span>Progress: </span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="tab-display">{{App.progress.value}}</span><br/><br/>
+    {{cinder-jqui-progressbar valueObjectBinding="progress" class="examples-progress-bar"}}<br/>
+    {{cinder-jqui-progressbar valueObjectBinding="progress" class="examples-progress-bar"}}
+    <span>Progress: </span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="tab-display">{{progress.value}}</span><br/><br/>
     <button {{action "dec10"}}>
       - 10
     </button>
@@ -55,7 +52,7 @@
     </button>
     <br/>
     <span id="action-button-text">(use buttons to modify data model)</span>
-    {{view Cinder.AboutFtr}}
+    {{cinder-about-footer}}
   </script>
 
 </body>

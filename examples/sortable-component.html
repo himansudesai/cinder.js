@@ -2,38 +2,29 @@
 <html>
 <head>
 <title>Cinder - Sortable (Ember Component)</title>
-<script src="../lib/jquery-1.10.2.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
-<script src="../lib/handlebars-1.0.0.js"></script>
-<script src="../lib/ember-1.7.0.js"></script>
-<script type="text/javascript" src="../lib/cinder.js"></script>
-<LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
-<LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
+  <script src="../lib/jquery-1.10.2.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+  <script src="../lib/handlebars-1.0.0.js"></script>
+  <script src="http://builds.emberjs.com/canary/ember.debug.js"></script>
+  <script type="text/javascript" src="../lib/cinder.js"></script>
+  <LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
+  <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
 </head>
 <body>
   <script language="javascript">
     var App = Ember.Application.create({LOG_TRANSITIONS: true});
     Cinder.hookupComponents(App);
 
-    App.cars = Ember.ArrayProxy.create({
-      'content': Ember.A(['Accord', 'Bronco', 'Camaro', 'Dart', 'Explorer', 'Focus', 'Golf' ]),
-      contentDidChange: function(newArrayProxy) {
-        if (newArrayProxy) {
-          console.log('current collection = ' + newArrayProxy.content);
-          console.log('element that moved = ' + this.dragInfo.item);
-          console.log('old item = ' + this.dragInfo.oldIndex);
-          console.log('new item = ' + this.dragInfo.newIndex);
-        }
-      }
-    });
-
     App.ApplicationController = Ember.Controller.extend({
+      cars: Ember.ArrayProxy.create({
+        'content': Ember.A(['Accord', 'Bronco', 'Camaro', 'Dart', 'Explorer', 'Focus', 'Golf' ])
+      }),
       actions: {
         move0To1: function() {
-          App.cars.move(0, 1);
+          this.cars.move(0, 1);
         },
         move6To0: function() {
-          App.cars.move(6, 0);
+          this.cars.move(6, 0);
         }
       }
     });
@@ -42,15 +33,15 @@
 
   <script type="text/x-handlebars">
     <a href="../index.html" STYLE="font: 10pt courier; color: olive">Examples</a> <br/>
-    {{view Cinder.AboutHdr}}
+    {{cinder-about-header}}
     <h2 id="example-title">Sortable (Ember Component)</h2>
-    {{cinder-jqui-sortable sortablesBinding="App.cars" id="my-sortables"}}
+    {{cinder-jqui-sortable sortablesBinding="cars" id="my-sortables"}}
     <br/>
-    <span class="results-label">App.cars = </span><span class="results">{{App.cars.content}}</span>
+    <span class="results-label">cars = </span><span class="results">{{cars.content}}</span>
     <br/>
-    <span class="results-label">Item that moved = </span><span class="results">{{App.cars.dragInfo.item}}</span>
-    <span class="results-label">From = </span><span class="results">{{App.cars.dragInfo.oldIndex}}</span>
-    <span class="results-label">To = </span><span class="results">{{App.cars.dragInfo.newIndex}}</span>
+    <span class="results-label">Item that moved = </span><span class="results">{{cars.dragInfo.item}}</span>
+    <span class="results-label">From = </span><span class="results">{{cars.dragInfo.oldIndex}}</span>
+    <span class="results-label">To = </span><span class="results">{{cars.dragInfo.newIndex}}</span>
     <br/>
     <button {{action "move0To1"}}>
       Pos 1 -> Pos 2
@@ -58,7 +49,7 @@
     <button {{action "move6To0"}}>
       Pos 7 -> Pos 1
     </button>
-    {{view Cinder.AboutFtr}}
+    {{cinder-about-footer}}
   </script>
 
 </body>

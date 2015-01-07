@@ -2,13 +2,14 @@
 <html>
 <head>
   <title>Cinder - Progress Bar (Ember View)</title>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="../lib/jquery-ui-1.8.18.custom.min.js"></script>
-  <script src="http://cloud.github.com/downloads/emberjs/ember.js/ember-0.9.7.min.js"></script>
+  <script src="../lib/jquery-1.10.2.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+  <script src="../lib/handlebars-1.0.0.js"></script>
+  <script src="../lib/ember-1.7.0.js"></script>
   <script type="text/javascript" src="../lib/cinder.js"></script>
   <LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
   <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
-</head>
+  </head>
 <body>
   <script language="javascript">
     var App = Ember.Application.create();
@@ -38,6 +39,21 @@
         (cur < 100) ? this.set('value', cur + 10) : this.set('value', cur);
       }
     });
+
+    App.ApplicationController = Ember.Controller.extend({
+      actions: {
+        reset: function() {
+          App.progress.reset();
+        },
+        dec10: function() {
+          App.progress.dec10();
+        },
+        inc10: function() {
+          App.progress.inc10();
+        }
+      }
+    });
+
   </script>
 
   <script type="text/x-handlebars">
@@ -48,15 +64,16 @@
     {{view App.progressBarView valueObjectBinding="App.progress" class="examples-progress-bar"}}<br/>
     {{view Cinder.ProgressBarView valueObjectBinding="App.progress" class="examples-progress-bar"}}
     <span>Progress: </span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="tab-display">{{App.progress.value}}</span><br/><br/>
-    {{#view Em.Button target="App.progress" action="dec10"}}
+
+    <button {{action "dec10"}}>
       - 10
-    {{/view}}
-    {{#view Em.Button target="App.progress" action="reset"}}
+    </button>
+    <button {{action "reset"}}>
       Reset
-    {{/view}}
-    {{#view Em.Button target="App.progress" action="inc10"}}
+    </button>
+    <button {{action "inc10"}}>
       + 10
-    {{/view}}
+    </button>
     <br/>
     <span id="action-button-text">(use buttons to modify data model)</span>
     {{view Cinder.AboutFtr}}
