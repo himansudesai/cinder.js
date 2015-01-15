@@ -19,6 +19,7 @@
       cars: Ember.ArrayProxy.create({
         'content': Ember.A(['Accord', 'Bronco', 'Camaro', 'Dart', 'Explorer', 'Focus', 'Golf' ])
       }),
+      dragInfo: Ember.Object.create({item: undefined, oldIndex: undefined, newIndex: undefined}),
       actions: {
         move0To1: function() {
           this.cars.move(0, 1);
@@ -28,26 +29,25 @@
         }
       }
     });
-
   </script>
 
   <script type="text/x-handlebars">
     <a href="../index.html" STYLE="font: 10pt courier; color: olive">Examples</a> <br/>
     {{cinder-about-header}}
     <h2 id="example-title">Sortable (Ember Component)</h2>
-    {{cinder-jqui-sortable sortablesBinding="cars" id="my-sortables"}}
+    {{cinder-jqui-sortable sortablesBinding="cars" dragInfoBinding="dragInfo" id="my-sortables"}}
     <br/>
     <span class="results-label">cars = </span><span class="results">{{cars.content}}</span>
     <br/>
-    <span class="results-label">Item that moved = </span><span class="results">{{cars.dragInfo.item}}</span>
-    <span class="results-label">From = </span><span class="results">{{cars.dragInfo.oldIndex}}</span>
-    <span class="results-label">To = </span><span class="results">{{cars.dragInfo.newIndex}}</span>
+    <span class="results-label">Item that moved = </span><span class="results">{{dragInfo.item}}</span>
+    <span class="results-label">From = </span><span class="results">{{dragInfo.oldIndex}}</span>
+    <span class="results-label">To = </span><span class="results">{{dragInfo.newIndex}}</span>
     <br/>
     <button {{action "move0To1"}}>
-      Pos 1 -> Pos 2
+      Index 0 -> Index 1
     </button>
     <button {{action "move6To0"}}>
-      Pos 7 -> Pos 1
+      Index 6 -> Index 0
     </button>
     {{cinder-about-footer}}
   </script>
