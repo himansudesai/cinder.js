@@ -59,16 +59,16 @@
         cats: function() {
           App.myTabs.set('content', App.cats);
         },
-        tab1: function() {
+        tab0: function() {
           App.curTab.set('value', 0);
         },
-        tab2: function() {
+        tab1: function() {
           App.curTab.set('value', 1);
         },
-        tab3: function() {
+        tab2: function() {
           App.curTab.set('value', 2);
         },
-        tab4: function() {
+        tab3: function() {
           App.curTab.set('value', 3);
         }
       }
@@ -88,6 +88,9 @@
     <button {{action "cats"}}>
       Show Cats
     </button>
+    <button {{action "tab0"}}>
+      Sel Tab 0
+    </button>
     <button {{action "tab1"}}>
       Sel Tab 1
     </button>
@@ -96,9 +99,6 @@
     </button>
     <button {{action "tab3"}}>
       Sel Tab 3
-    </button>
-    <button {{action "tab4"}}>
-      Sel Tab 4
     </button>
     <br/>
     <span id="action-button-text">(use buttons to modify data model)</span>
