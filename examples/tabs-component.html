@@ -59,19 +59,20 @@
         cats: function() {
           App.myTabs.set('content', App.cats);
         },
-        tab0: function() {
+        tab1: function() {
           App.curTab.set('value', 0);
         },
-        tab1: function() {
+        tab2: function() {
           App.curTab.set('value', 1);
+        },
+        tab3: function() {
+          App.curTab.set('value', 2);
+        },
+        tab4: function() {
+          App.curTab.set('value', 3);
         }
       }
     });
-
-    // App.Router.map(function() {
-    //   this.route('nonexistent', {path: '/tabs*'});
-    // });
-
 
   </script>
 
@@ -82,16 +83,22 @@
     {{cinder-jqui-tabs tabsBinding="tabs" curTabBinding="curTab" id="my-tabs"}}
     <span>Currently Selected Tab</span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="tab-display">{{curTab.value}}</span><br/><br/>
     <button {{action "dogs"}}>
-      Dogs
+      Show Dogs
     </button>
     <button {{action "cats"}}>
-      Cats
-    </button>
-    <button {{action "tab0"}}>
-      Tab 0
+      Show Cats
     </button>
     <button {{action "tab1"}}>
-      Tab 1
+      Sel Tab 1
+    </button>
+    <button {{action "tab2"}}>
+      Sel Tab 2
+    </button>
+    <button {{action "tab3"}}>
+      Sel Tab 3
+    </button>
+    <button {{action "tab4"}}>
+      Sel Tab 4
     </button>
     <br/>
     <span id="action-button-text">(use buttons to modify data model)</span>
