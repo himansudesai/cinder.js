@@ -49,12 +49,12 @@
     <a href="../index.html" STYLE="font: 10pt courier; color: olive">Examples</a> <br/>
     {{cinder-about-header}}
     <h2 id="example-title">Slider (Ember Component)</h2>
-    {{cinder-jqui-slider valueObjectBinding="slider" stop="slider1HasStopped"}}
-    {{cinder-jqui-slider valueObjectBinding="slider" id="vertical-slider" orientation="vertical"}}
+    {{jqui-slider valueObjectBinding="slider" stop="slider1HasStopped"}}
+    {{jqui-slider valueObjectBinding="slider" id="vertical-slider" orientation="vertical"}}
     <div id="slider-text-value">
       {{slider.value}}
     </div>
-    {{ cinder-jqui-slider valueObjectBinding="slider"}}
+    {{jqui-slider valueObjectBinding="slider"}}
     <br/>
     <button id="reset-button" {{action "resetSlider"}}>
       Reset Slider Value

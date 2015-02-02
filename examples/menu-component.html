@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cinder - Menu (Ember Component)</title>
+  <script>
+    EmberENV = {
+      FEATURES: {
+        'ember-htmlbars': true,
+        'ember-htmlbars-block-params': true
+      }
+    }
+  </script>
+  <script src="../lib/jquery-1.10.2.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+  <script src="http://builds.emberjs.com/canary/ember.debug.js"></script>
+  <script src="http://builds.emberjs.com/canary/ember-template-compiler.js"></script>
+  <script type="text/javascript" src="../lib/cinder.js"></script>
+  <LINK REL=StyleSheet HREF="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" TYPE="text/css" MEDIA=screen>
+  <LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
+  <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
+
+</head>
+
+<body>
+  <script language="javascript">
+    var App = Ember.Application.create({LOG_TRANSITIONS: true});
+    Cinder.hookupComponents(App);
+
+    // individual fruits
+    App.gala = Ember.Object.create({Gala: true});
+    App.apples = Ember.Object.create({
+      Apple: [
+        Ember.Object.create({Green: [
+          Ember.Object.create({GoldenDelicious: true}),
+          Ember.Object.create({GrannySmith: true})
+        ]}),
+        Ember.Object.create({Red: [
+          Ember.Object.create({Fuji: true}),
+          App.gala,
+          Ember.Object.create({Macintosh: true})
+        ]})
+      ]
+    });
+    App.banana = Ember.Object.create({Banana: 'anything non falsy'});
+    App.cherry = Ember.Object.create({Cherry: false});
+    App.date = Ember.Object.create({Date: true});
+
+    //individual veggies
+    App.asparagus = Ember.Object.create({asparagus: 1});
+    App.broccoli = Ember.Object.create({broccoli: true});
+    App.carrot = Ember.Object.create({carrot: undefined});
+    App.dill = Ember.Object.create({dill: true});
+    App.eggplant = Ember.Object.create({eggplant: true});
+
+    App.fruits = [ App.apples, App.banana, App.cherry, App.date ];
+    App.veggies = [ App.asparagus, App.broccoli, App.carrot, App.dill, App.eggplant ];
+    App.menu = Ember.Object.create({content: App.fruits});
+
+    App.ApplicationController = Ember.Controller.extend({
+      menu: App.menu,
+      category: 'fruits',
+      actions: {
+        switchToVegetables: function() {
+          this.menu.set('content', App.veggies);
+        },
+        switchToFruits: function() {
+          this.menu.set('content', App.fruits);
+        },
+        disableBanana: function() {
+          App.banana.set('Banana', false);
+        },
+        enableBanana: function() {
+          App.banana.set('Banana', true);
+        },
+        disableGala: function() {
+          App.gala.set('Gala', false);
+        },
+        enableGala: function() {
+          App.gala.set('Gala', true);
+        },
+        logSelectedItem: function(val) {
+          console.log(val + " was selected");
+        }
+      }
+    });
+  </script>
+
+  <script type="text/x-handlebars">
+    <a href="../index.html" STYLE="font: 10pt courier; color: olive">Examples</a> <br/>
+    {{cinder-about-header}}
+    <h2 id="example-title">Menu (Ember Component)</h2>
+    {{jqui-menu menuBinding="menu" itemSelected="logSelectedItem"}}
+    <div id="menu-backdrop">
+    </div>
+    <span class="results-label">Last Selection: </span><span class="results">{{menu.selection}}</span>
+    <br/>
+    <button {{action "switchToVegetables"}}>
+      Switch to Vegetables
+    </button>
+    <button {{action "switchToFruits"}}>
+      Switch to Fruits
+    </button>
+    <br/>
+    <button {{action "disableBanana"}}>
+      Disable Banana
+    </button>
+    <button {{action "enableBanana"}}>
+      Enable Banana
+    </button>
+    <br/>
+    <button {{action "disableGala"}}>
+      Disable Gala
+    </button>
+    <button {{action "enableGala"}}>
+      Enable Gala
+    </button>
+    {{cinder-about-footer}}
+  </script>
+
+</body>
+</html>
