@@ -28,56 +28,66 @@
     Cinder.hookupComponents(App);
 
     // individual fruits
-    App.gala = Ember.Object.create({Gala: true});
+    App.gala = Ember.Object.create({label: "Gala"});
     App.apples = Ember.Object.create({
-      Apple: [
-        Ember.Object.create({Green: [
-          Ember.Object.create({GoldenDelicious: true}),
-          Ember.Object.create({GrannySmith: true})
-        ]}),
-        Ember.Object.create({Red: [
-          Ember.Object.create({Fuji: true}),
-          App.gala,
-          Ember.Object.create({Macintosh: true})
-        ]})
+      label: "Apple",
+      items: [
+          Ember.Object.create({
+              label: "Green",
+              items: [
+                Ember.Object.create({
+                    label: "GoldenDelicious",
+                    otherObjectAttr: "some value"
+                }),
+                Ember.Object.create({label: "GrannySmith"})
+              ]
+          }),
+          Ember.Object.create({
+              label: "Red",
+              items: [
+                Ember.Object.create({label: "Fuji"}),
+                App.gala,
+                Ember.Object.create({label: "Macintosh"})
+              ]
+          })
       ]
     });
-    App.banana = Ember.Object.create({Banana: 'anything non falsy'});
-    App.cherry = Ember.Object.create({Cherry: false});
-    App.date = Ember.Object.create({Date: true});
+    App.banana = Ember.Object.create({label: "Banana", disabled: true});
+    App.cherry = Ember.Object.create({label: "Cherry"});
+    App.date = Ember.Object.create({label: "Date"});
 
     //individual veggies
-    App.asparagus = Ember.Object.create({asparagus: 1});
-    App.broccoli = Ember.Object.create({broccoli: true});
-    App.carrot = Ember.Object.create({carrot: undefined});
-    App.dill = Ember.Object.create({dill: true});
-    App.eggplant = Ember.Object.create({eggplant: true});
+    App.asparagus = Ember.Object.create({label: "asparagus"});
+    App.broccoli = Ember.Object.create({label: "broccoli"});
+    App.carrot = Ember.Object.create({label: "carrot"});
+    App.dill = Ember.Object.create({label: "dill"});
+    App.eggplant = Ember.Object.create({label: "eggplant"});
 
     App.fruits = [ App.apples, App.banana, App.cherry, App.date ];
     App.veggies = [ App.asparagus, App.broccoli, App.carrot, App.dill, App.eggplant ];
-    App.menu = Ember.Object.create({content: App.fruits});
+    App.menu = Ember.Object.create({items: App.fruits});
 
     App.ApplicationController = Ember.Controller.extend({
       menu: App.menu,
       category: 'fruits',
       actions: {
         switchToVegetables: function() {
-          this.menu.set('content', App.veggies);
+          this.menu.set('items', App.veggies);
         },
         switchToFruits: function() {
-          this.menu.set('content', App.fruits);
+          this.menu.set('items', App.fruits);
         },
         disableBanana: function() {
-          App.banana.set('Banana', false);
+          App.banana.set('disabled', true);
         },
         enableBanana: function() {
-          App.banana.set('Banana', true);
+          App.banana.set('disabled', false);
         },
         disableGala: function() {
-          App.gala.set('Gala', false);
+          App.gala.set('disabled', true);
         },
         enableGala: function() {
-          App.gala.set('Gala', true);
+          App.gala.set('disabled', false);
         },
         logSelectedItem: function(val) {
           console.log(val + " was selected");
@@ -87,7 +97,7 @@
   </script>
 
   <script type="text/x-handlebars">
-    <a href="../index.html" STYLE="font: 10pt courier; color: olive">Examples</a> <br/>
+    <a href="../index.html" STYLE="font: 12pt courier; color: olive; font-style: italic">Examples</a> <br/>
     {{cinder-about-header}}
     <h2 id="example-title">Menu (Ember Component)</h2>
     {{jqui-menu menuBinding="menu" itemSelected="logSelectedItem"}}
