@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cinder - Select Menu (Ember Component)</title>
+  <script>
+    EmberENV = {
+      FEATURES: {
+        'ember-htmlbars': true,
+        'ember-htmlbars-block-params': true
+      }
+    }
+  </script>
+  <script src="../lib/jquery-1.10.2.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+  <script src="http://builds.emberjs.com/canary/ember.debug.js"></script>
+  <script src="http://builds.emberjs.com/canary/ember-template-compiler.js"></script>
+  <script type="text/javascript" src="../lib/cinder.js"></script>
+  <LINK REL=StyleSheet HREF="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" TYPE="text/css" MEDIA=screen>
+  <LINK REL=StyleSheet HREF="../css/jquery-ui-1.8.18.custom.css" TYPE="text/css" MEDIA=screen>
+  <LINK REL=StyleSheet HREF="../css/examples.css" TYPE="text/css" MEDIA=screen>
+
+</head>
+
+<body>
+  <script language="javascript">
+    var App = Ember.Application.create({LOG_TRANSITIONS: true});
+    Cinder.hookupComponents(App);
+
+    App.descriptiveSpeeds = [
+        Ember.Object.create({label: "Slower"}),
+        Ember.Object.create({label: "Slow"}),
+        Ember.Object.create({label: "Medium", selected: true}),
+        Ember.Object.create({label: "Fast", disabled: true}),
+        Ember.Object.create({label: "Faster"})
+    ];
+
+    App.animalSpeeds = [
+        Ember.Object.create({label: "Snail"}),
+        Ember.Object.create({label: "Chicken"}),
+        Ember.Object.create({label: "Cat", selected: true}),
+        Ember.Object.create({label: "Greyhound", disabled: true}),
+        Ember.Object.create({label: "Cheetah"})
+    ];
+
+    App.speeds = Ember.Object.create({
+        name: 'speeds', // optional.  does not do much
+        disabled: false, // optional.  missing key === false
+        items: App.descriptiveSpeeds
+    });
+
+    App.numbers = Ember.Object.create({
+        name: 'numbers',
+        disabled: true,
+        items: [
+            Ember.Object.create({label: "1"}),
+            Ember.Object.create({label: "2"}),
+            Ember.Object.create({label: "3"}),
+            Ember.Object.create({label: "4", disabled: true}),
+            Ember.Object.create({label: "5"}),
+            Ember.Object.create({label: "6"}),
+            Ember.Object.create({label: "7"}),
+            Ember.Object.create({label: "8"}),
+            Ember.Object.create({label: "9"}),
+            Ember.Object.create({label: "10"})
+        ]
+    });
+
+    App.otherFiles = Ember.Object.create({
+        disabled: true,
+        label: "Other files",
+        items: [
+            Ember.Object.create({label: "Some unknown file"}),
+            Ember.Object.create({label: "Some other file with a very long option text"})
+        ]
+    });
+
+    App.files = Ember.Object.create({
+        name: 'files',
+        items: [
+            Ember.Object.create({
+                disabled: false,
+                label: "Scripts",
+                items: [
+                    Ember.Object.create({label: "jQuery.js"}),
+                    Ember.Object.create({label: "ui.jQuery.js"})
+                ]
+            }),
+            App.otherFiles
+        ]
+    });
+
+    App.ApplicationController = Ember.Controller.extend({
+      speeds: App.speeds,
+      mediumSpeed: App.mediumSpeed,
+      fasterSpeed: App.fasterSpeed,
+      numbers: App.numbers,
+      files: App.files,
+      category: 'fruits',
+      actions: {
+        switchToAnimalSpeeds: function() {
+          this.speeds.set('items', App.animalSpeeds);
+        },
+        switchToDescriptiveSpeeds: function() {
+          this.speeds.set('items', App.descriptiveSpeeds);
+        },
+        enableOtherFiles: function() {
+          App.otherFiles.set('disabled', false);
+        },
+        disableOtherFiles: function() {
+          App.otherFiles.set('disabled', true);
+        },
+        enableNumbers: function() {
+          this.numbers.set('disabled', false);
+        },
+        disableNumbers: function() {
+          this.numbers.set('disabled', true);
+        },
+        logSelectedItem: function(val) {
+          console.log(val + " was selected");
+        }
+      }
+    });
+  </script>
+
+  <script type="text/x-handlebars">
+    <a href="../index.html" STYLE="font: 12pt courier; color: olive; font-style: italic">Examples</a> <br/>
+    {{cinder-about-header}}
+    <h2 id="example-title">Select Menu (Ember Component)</h2>
+
+    <!-- Speeds Select Menu -->
+    <label for="speeds">Select a speed</label>
+    {{jqui-select-menu menuBinding="speeds" width=200 itemSelected="logSelectedItem"}}
+    <span class="results-label">Last Selection: </span><span class="results">{{speeds.selection}}</span>
+    <br/>
+    <button {{action "switchToAnimalSpeeds"}}>
+      Switch to Animal Speeds
+    </button>
+    <button {{action "switchToDescriptiveSpeeds"}}>
+      Switch to Descriptive Speeds
+    </button>
+    <br/><br/><br/>
+
+    <!-- Files Select Menu -->
+    <label for="files">Select a file</label>
+    {{jqui-select-menu menuBinding="files" width=200 itemSelected="logSelectedItem"}}
+    <span class="results-label">Last Selection: </span><span class="results">{{files.selection}}</span>
+    <br/>
+    <button {{action "enableOtherFiles"}}>
+      Enable Other Files
+    </button>
+    <button {{action "disableOtherFiles"}}>
+      Disable Other Files
+    </button>
+    <br/><br/><br/>
+
+    <!-- Numbers Select Menu -->
+    <label for="numbers">Select a number</label>
+    {{jqui-select-menu menuBinding="numbers" width=100 itemSelected="logSelectedItem"}}
+    <span class="results-label">Last Selection: </span><span class="results">{{numbers.selection}}</span>
+    <br/>
+    <button {{action "enableNumbers"}}>
+      Enable Numbers
+    </button>
+    <button {{action "disableNumbers"}}>
+      Disable Numbers
+    </button>
+    <br/>
+    {{cinder-about-footer}}
+  </script>
+
+</body>
+</html>
