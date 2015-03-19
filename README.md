@@ -12,7 +12,7 @@ cinder.js and cinder-component.js have beeen tested with
 - jquery-1.10.2
 - jqueryui/1.11.1
 - handlebars-1.0.0
-- ember-1.7.0
+- ember-canary
 
 ### Supported Widgets
 - Slider
@@ -21,5 +21,11 @@ cinder.js and cinder-component.js have beeen tested with
 - Tabs
 - Progress Bar
 - Sortable
+- Autocomplete
+- Button
+- Tooltip
+- Menu
+- Select Menu
+- Spinner
 
 The examples can be viewed online at himansudesai.github.com
