@@ -67,7 +67,7 @@
     <a href="../index.html" STYLE="font: 12pt courier; color: olive; font-style: italic">Examples</a> <br/>
     {{cinder-about-header}}
     <h2 id="example-title">Autocomplete (Ember Component)</h2>
-    {{jqui-autocomplete itemsBinding="languages" selectedItemBinding="selectedItem"}}
+    {{jqui-autocomplete items=languages selectedItem=selectedItem}}
     <br/>
     <label>Current Selection</label>&nbsp;&nbsp;{{selectedItem.value}}
     <br/><button {{action "addGoAndRust"}}>

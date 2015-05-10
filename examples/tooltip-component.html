@@ -25,13 +25,13 @@
     Cinder.hookupComponents(App);
 
     App.tooltip = Em.Object.create({
-      value: "We ask for your age only for statistical purposes.",
+      tip: "We ask for your age only for statistical purposes.",
     });
 
     App.modifyTooltipButton = Em.Object.create({
       'label': 'Modify Tooltip',
       click: function() {
-        App.tooltip.set('value', "Your age may be used against you");
+        App.tooltip.set('tip', "Your age may be used against you");
       }
     });
 
@@ -48,11 +48,11 @@
     {{cinder-about-header}}
     <h2 id="example-title">Tooltip (Ember Component)</h2>
     <label>Your age:</label>
-    {{#jqui-tooltip valueObjectBinding="tooltip"}}
+    {{#jqui-tooltip tooltip=tooltip}}
     {{input value=age}}
     {{/jqui-tooltip}}
     <br/><br/>
-    {{jqui-button buttonBinding="modifyTooltip"}}
+    {{jqui-button button=modifyTooltip}}
     <p style="color: Olive; font-style: italic">(hover over input for tooltip before/after clicking on ModifyTooltip)</p>
     {{cinder-about-footer}}
   </script>

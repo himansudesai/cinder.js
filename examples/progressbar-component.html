@@ -47,8 +47,8 @@
     <a href="../index.html" STYLE="font: 12pt courier; color: olive; font-style: italic">Examples</a> <br/>
     {{cinder-about-header}}
     <h2 id="example-title">Progress Bar</h2>
-    {{jqui-progressbar valueObjectBinding="progress" class="examples-progress-bar"}}<br/>
-    {{jqui-progressbar valueObjectBinding="progress" class="examples-progress-bar"}}
+    {{jqui-progressbar progressbar=progress class="examples-progress-bar"}}<br/>
+    {{jqui-progressbar progressbar=progress class="examples-progress-bar"}}
     <span>Progress: </span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="tab-display">{{progress.value}}</span><br/><br/>
     <button {{action "dec10"}}>
       - 10

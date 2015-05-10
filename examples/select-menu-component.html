@@ -130,7 +130,7 @@
 
     <!-- Speeds Select Menu -->
     <label for="speeds">Select a speed</label>
-    {{jqui-select-menu menuBinding="speeds" width=200 itemSelected="logSelectedItem"}}
+    {{jqui-select-menu menu=speeds width=200 itemSelected="logSelectedItem"}}
     <span class="results-label">Last Selection: </span><span class="results">{{speeds.selection}}</span>
     <br/>
     <button {{action "switchToAnimalSpeeds"}}>
@@ -143,7 +143,7 @@
 
     <!-- Files Select Menu -->
     <label for="files">Select a file</label>
-    {{jqui-select-menu menuBinding="files" width=200 itemSelected="logSelectedItem"}}
+    {{jqui-select-menu menu=files width=200 itemSelected="logSelectedItem"}}
     <span class="results-label">Last Selection: </span><span class="results">{{files.selection}}</span>
     <br/>
     <button {{action "enableOtherFiles"}}>
@@ -156,7 +156,7 @@
 
     <!-- Numbers Select Menu -->
     <label for="numbers">Select a number</label>
-    {{jqui-select-menu menuBinding="numbers" width=100 itemSelected="logSelectedItem"}}
+    {{jqui-select-menu menu=numbers width=100 itemSelected="logSelectedItem"}}
     <span class="results-label">Last Selection: </span><span class="results">{{numbers.selection}}</span>
     <br/>
     <button {{action "enableNumbers"}}>

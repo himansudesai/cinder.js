@@ -34,7 +34,6 @@
       slider: App.slider,
       actions: {
         resetSlider: function() {
-          console.log("RESET CALLED");
           App.slider.reset();
         },
         slider1HasStopped: function() {
@@ -49,12 +48,12 @@
     <a href="../index.html" STYLE="font: 12pt courier; color: olive; font-style: italic">Examples</a> <br/>
     {{cinder-about-header}}
     <h2 id="example-title">Slider (Ember Component)</h2>
-    {{jqui-slider valueObjectBinding="slider" stop="slider1HasStopped"}}
-    {{jqui-slider valueObjectBinding="slider" id="vertical-slider" orientation="vertical"}}
+    {{jqui-slider slider=slider stop="slider1HasStopped"}}
+    {{jqui-slider slider=slider id="vertical-slider" orientation="vertical"}}
     <div id="slider-text-value">
       {{slider.value}}
     </div>
-    {{jqui-slider valueObjectBinding="slider"}}
+    {{jqui-slider slider=slider}}
     <br/>
     <button id="reset-button" {{action "resetSlider"}}>
       Reset Slider Value

@@ -61,7 +61,7 @@
     <h2 id="example-title">Spinner (Ember Component)</h2>
 
     <label>Spinner</label>
-    {{jqui-spinner min=-3 max=10 width=21 valueObjectBinding="basicValue" itemSelected="logSelectedItem"}}
+    {{jqui-spinner min=-3 max=10 width=21 spinner=basicValue itemSelected="logSelectedItem"}}
     <span class="results-label">Last Value: </span><span class="results">{{basicValue.value}}</span>
     <br/>
     <button {{action "resetBasicValue"}}>
@@ -70,7 +70,7 @@
     <br/><br/><br/>
 
     <label>Decimal Spinner</label>
-    {{jqui-spinner min=2 max=11.53 step=0.01 width=100 numberFormat="n" valueObjectBinding="decimalValue" itemSelected="logSelectedItem"}}
+    {{jqui-spinner min=2 max=11.53 step=0.01 width=100 numberFormat="n" spinner=decimalValue itemSelected="logSelectedItem"}}
     <span class="results-label">Last Selection: </span><span class="results">{{decimalValue.value}}</span>
     <br/>
     <button {{action "resetDecimalValue"}}>
@@ -79,7 +79,7 @@
     <br/><br/><br/>
 
     <label>Currency Spinner</label>
-    {{jqui-spinner width=200 step=3 min=4 max=21 numberFormat="C" culture="en-US" valueObjectBinding="currencyValue" itemSelected="logSelectedItem"}}
+    {{jqui-spinner width=200 step=3 min=4 max=21 numberFormat="C" culture="en-US" spinner=currencyValue itemSelected="logSelectedItem"}}
     <span class="results-label">Last Selection: </span><span class="results">{{currencyValue.value}}</span>
     <br/>
     <button {{action "resetCurrencyValue"}}>
